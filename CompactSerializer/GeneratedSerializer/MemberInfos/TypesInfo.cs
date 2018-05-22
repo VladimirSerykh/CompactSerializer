@@ -110,7 +110,7 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
 
             
             var hasSuitableConstructor = (type.GetConstructor(new [] { enumerableType }) != null);
-            return hasSuitableConstructor;    
+            return hasSuitableConstructor;
         }
 
         public static bool IsNullable(Type type)
@@ -130,61 +130,19 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
             return nullableType.IsAssignableFrom(type);
         }
 
-        public static MethodInfo GetTypeMethodInfo
-        {
-            get
-            {
-                return _getTypeMethodLazy.Value;
-            }
-        }
+        public static MethodInfo GetTypeMethodInfo => _getTypeMethodLazy.Value;
 
-        public static MethodInfo GetIsArrayMethodInfo
-        {
-            get
-            {
-                return _getIsArrayMethodLazy.Value;
-            }
-        }
+        public static MethodInfo GetIsArrayMethodInfo => _getIsArrayMethodLazy.Value;
 
-        public static MethodInfo GetGenericTypeDefinitionMethodInfo
-        {
-            get
-            {
-                return _getGenericTypeDefinitionMethodLazy.Value;
-            }
-        }
+        public static MethodInfo GetGenericTypeDefinitionMethodInfo => _getGenericTypeDefinitionMethodLazy.Value;
 
-        public static MethodInfo GetGenericArgumentsMethodInfo
-        {
-            get
-            {
-                return _getGenericArgumentsMethodLazy.Value;
-            }
-        }
+        public static MethodInfo GetGenericArgumentsMethodInfo => _getGenericArgumentsMethodLazy.Value;
 
-        public static MethodInfo GetElementTypeMethodInfo
-        {
-            get
-            {
-                return _getElementTypeMethodLazy.Value;
-            }
-        }
+        public static MethodInfo GetElementTypeMethodInfo => _getElementTypeMethodLazy.Value;
 
-        public static MethodInfo GetRuntimeTypeHandleMethodInfo
-        {
-            get
-            {
-                return _getTypeFromHandleMethodLazy.Value;
-            }
-        }
+        public static MethodInfo GetRuntimeTypeHandleMethodInfo => _getTypeFromHandleMethodLazy.Value;
 
-         public static MethodInfo GetDisposeMethodInfo
-        {
-            get
-            {
-                return _getDisposeMethodLazy.Value;
-            }
-        }
+        public static MethodInfo GetDisposeMethodInfo => _getDisposeMethodLazy.Value;
 
         private static readonly Lazy<MethodInfo> _getTypeMethodLazy = new Lazy<MethodInfo>(() =>
             ReflectionInfo.GetMethodInfo<object, Type>(obj => obj.GetType()));

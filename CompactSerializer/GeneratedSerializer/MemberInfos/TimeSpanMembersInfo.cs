@@ -5,21 +5,9 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
 {
     public static class TimeSpanMembersInfo
     {
-        public static MethodInfo TicksProperty
-        {
-            get
-            {
-                return _ticksPropertyLazy.Value;
-            }
-        }
+        public static MethodInfo TicksProperty => _ticksPropertyLazy.Value;
 
-        public static MethodInfo FromTicksMethod
-        {
-            get
-            {
-                return _fromTicksMethodLazy.Value;
-            }
-        }
+        public static MethodInfo FromTicksMethod => _fromTicksMethodLazy.Value;
 
         private static readonly Lazy<MethodInfo> _ticksPropertyLazy = new Lazy<MethodInfo>(() =>
            ReflectionInfo.GetPropertyGetterMethodInfo<TimeSpan, long>(dt => dt.Ticks));

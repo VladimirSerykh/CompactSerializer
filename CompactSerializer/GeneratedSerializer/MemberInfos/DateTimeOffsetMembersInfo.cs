@@ -5,29 +5,11 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
 {
     public static class DateTimeOffsetMembersInfo
     {
-        public static MethodInfo OffsetProperty
-        {
-            get
-            {
-                return _offsetPropertyLazy.Value;
-            }
-        }
+        public static MethodInfo OffsetProperty => _offsetPropertyLazy.Value;
 
-        public static MethodInfo TicksProperty
-        {
-            get
-            {
-                return _ticksPropertyLazy.Value;
-            }
-        }
+        public static MethodInfo TicksProperty => _ticksPropertyLazy.Value;
 
-        public static ConstructorInfo TicksOffsetConstructor
-        {
-            get
-            {
-                return _ticksOffsetConstructorLazy.Value;
-            }
-        }
+        public static ConstructorInfo TicksOffsetConstructor => _ticksOffsetConstructorLazy.Value;
 
         private static readonly Lazy<MethodInfo> _offsetPropertyLazy = new Lazy<MethodInfo>(() =>
            ReflectionInfo.GetPropertyGetterMethodInfo<DateTimeOffset, TimeSpan>(dt => dt.Offset));

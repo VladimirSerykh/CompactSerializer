@@ -6,25 +6,13 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
 {
     public class StreamMethodsInfo
     {
-        public static MethodInfo WriteByte
-        {
-            get { return _writeByteLazy.Value; }
-        }
+        public static MethodInfo WriteByte => _writeByteLazy.Value;
 
-        public static MethodInfo Write
-        {
-            get { return _writeLazy.Value; }
-        }
+        public static MethodInfo Write => _writeLazy.Value;
 
-        public static MethodInfo ReadByte
-        {
-            get { return _readByteLazy.Value; }
-        }
+        public static MethodInfo ReadByte => _readByteLazy.Value;
 
-        public static MethodInfo Read
-        {
-            get { return _readLazy.Value; }
-        }
+        public static MethodInfo Read => _readLazy.Value;
 
         private static readonly Lazy<MethodInfo> _writeByteLazy = new Lazy<MethodInfo>(() =>
             ReflectionInfo.GetVoidMethodInfo<Stream>(stream => stream.WriteByte(0)));

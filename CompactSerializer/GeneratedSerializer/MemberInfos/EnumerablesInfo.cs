@@ -26,21 +26,9 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
             return method;
         }
 
-        public static MethodInfo ArrayLengthGetter
-        {
-            get
-            {
-                return _arrayLengthGetter.Value;
-            }
-        }
+        public static MethodInfo ArrayLengthGetter => _arrayLengthGetter.Value;
 
-        public static MethodInfo ArrayGetValueMethod
-        {
-            get
-            {
-                return _arrayGetValueMethodLazy.Value;
-            }
-        }
+        public static MethodInfo ArrayGetValueMethod => _arrayGetValueMethodLazy.Value;
 
         private static readonly Dictionary<Type, MethodInfo> ToArrayMethodsMap = new Dictionary<Type, MethodInfo>();
 

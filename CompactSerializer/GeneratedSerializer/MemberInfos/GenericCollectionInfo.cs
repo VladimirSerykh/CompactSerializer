@@ -74,53 +74,17 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
             get; private set;
         }
 
-        public MethodInfo CountPropertyGetter
-        {
-            get
-            {
-                return _countPropertyLazy.Value;
-            }
-        }
+        public MethodInfo CountPropertyGetter => _countPropertyLazy.Value;
 
-        public MethodInfo AddMethod
-        {
-            get
-            {
-                return _addMethodLazy.Value;
-            }
-        }
-        
-        public MethodInfo GetEnumeratorMethod
-        {
-            get 
-            {
-                return _getEnumeratorMethodLazy.Value;  
-            }
-        }
+        public MethodInfo AddMethod => _addMethodLazy.Value;
 
-        public Type EnumeratorType
-        {
-            get 
-            {
-                return _getEnumeratorMethodLazy.Value.ReturnType;  
-            }
-        }
+        public MethodInfo GetEnumeratorMethod => _getEnumeratorMethodLazy.Value;
 
-        public MethodInfo EnumeratorMoveNextMethod
-        {
-            get 
-            {
-                return _enumeratorMoveNextMethodLazy.Value;
-            }
-        }
+        public Type EnumeratorType => _getEnumeratorMethodLazy.Value.ReturnType;
 
-        public MethodInfo EnumeratorCurrentProperty
-        {
-            get 
-            {
-                return _enumeratorCurrentPropertyLazy.Value;
-            }
-        }
+        public MethodInfo EnumeratorMoveNextMethod => _enumeratorMoveNextMethodLazy.Value;
+
+        public MethodInfo EnumeratorCurrentProperty => _enumeratorCurrentPropertyLazy.Value;
 
         private readonly Lazy<MethodInfo> _countPropertyLazy;
 

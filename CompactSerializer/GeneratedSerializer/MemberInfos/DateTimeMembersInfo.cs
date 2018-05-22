@@ -5,29 +5,11 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
 {
     public class DateTimeMembersInfo
     {
-        public static MethodInfo KindProperty
-        {
-            get
-            {
-                return _kindPropertyLazy.Value;
-            }
-        }
+        public static MethodInfo KindProperty => _kindPropertyLazy.Value;
 
-        public static MethodInfo TicksProperty
-        {
-            get
-            {
-                return _ticksPropertyLazy.Value;
-            }
-        }
+        public static MethodInfo TicksProperty => _ticksPropertyLazy.Value;
 
-        public static ConstructorInfo Constructor
-        {
-            get
-            {
-                return _constructorLazy.Value;
-            }
-        }
+        public static ConstructorInfo Constructor => _constructorLazy.Value;
 
         private static readonly Lazy<MethodInfo> _kindPropertyLazy = new Lazy<MethodInfo>(() =>
            ReflectionInfo.GetPropertyGetterMethodInfo<DateTime, DateTimeKind>(dt => dt.Kind));
