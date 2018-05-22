@@ -106,7 +106,7 @@ namespace CompactSerializer
                         else
                         {
                             var ctor = property.PropertyType.GetConstructor(new [] { enumerableType });
-                            var enumerable = ctor.Invoke(new [] { array });
+                            var enumerable = ctor.Invoke(new object[] { array });
                             property.SetValue(theObject, enumerable);
                         }
                     }

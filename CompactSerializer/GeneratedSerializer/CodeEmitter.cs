@@ -918,7 +918,7 @@ namespace CompactSerializer.GeneratedSerializer
             var typeBytesCount = TypesInfo.GetBytesCount(forType);
 
             // push the amout of bytes to read onto the stack
-            _ilGenerator.Emit(OpCodes.Ldc_I4, typeBytesCount);            
+            _ilGenerator.Emit(OpCodes.Ldc_I4, typeBytesCount);
             // allocate array to store bytes
             _ilGenerator.Emit(OpCodes.Newarr, typeof(byte));
             // stores the allocated array in the local variable
@@ -1004,7 +1004,7 @@ namespace CompactSerializer.GeneratedSerializer
             // push the ticks variable to stack
             _ilGenerator.Emit(OpCodes.Ldloc, ticks);
             // push the fileTime variable to stack
-            _ilGenerator.Emit(OpCodes.Ldloc, kind);            
+            _ilGenerator.Emit(OpCodes.Ldloc, kind);
             // create DateTime from ticks and kind
             _ilGenerator.Emit(OpCodes.Newobj, DateTimeMembersInfo.Constructor);
         }
@@ -1040,7 +1040,7 @@ namespace CompactSerializer.GeneratedSerializer
             // not to leave return value on the stack
             _ilGenerator.Emit(OpCodes.Pop);
 
-            EmitConvertBytesArrayToDateTimeOffsetOnStack(byteArray);     
+            EmitConvertBytesArrayToDateTimeOffsetOnStack(byteArray);
         }
 
          private void EmitConvertBytesArrayToDateTimeOffsetOnStack(LocalBuilder byteArray)
@@ -1222,6 +1222,6 @@ namespace CompactSerializer.GeneratedSerializer
 
         private static readonly MethodInfo BytesToInt32MethodInfo = BitConverterMethodsInfo.ChooseToTypeMethod(typeof(Int32));
 
-        private ILGenerator _ilGenerator;
+        private readonly ILGenerator _ilGenerator;
     }
 }
