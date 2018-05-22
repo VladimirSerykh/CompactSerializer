@@ -11,7 +11,6 @@ namespace CompactSerializer
     public class ReflectionCompactSerializer<TObject> : CompactSerializerBase<TObject>
         where TObject: class, new ()
     {
-
         public ReflectionCompactSerializer()
         {
 

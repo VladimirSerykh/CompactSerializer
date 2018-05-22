@@ -133,6 +133,5 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
         private readonly Lazy<MethodInfo> _enumeratorCurrentPropertyLazy;
 
         private static readonly Dictionary<Type, GenericCollectionInfo> _collectionsInfos = new Dictionary<Type, GenericCollectionInfo>();
-
     }
 }

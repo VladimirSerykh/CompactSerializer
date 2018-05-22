@@ -18,7 +18,7 @@ namespace MeasureSerialization
     {
         static void Main(string[] args)
         {
-             var originalEntity = new Entity
+            var originalEntity = new Entity
             {
                 Name = "Name",
                 ShortName = string.Empty,
@@ -45,9 +45,9 @@ namespace MeasureSerialization
                 Weeks = new List<short>() { 3, 12, 24, 48, 53, 61 },
                 PricesHistory = new decimal[] { 225.8M, 226M, 227.87M, 224.87M },
                 BitMap = new bool[] { true, true, false, true, false, false, true, true },
-                ChildrenIds = new Guid [] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() },
-                Schedule = new DateTime [] { DateTime.Now.AddDays(-1), DateTime.Now.AddMonths(2), DateTime.Now.AddYears(10) },
-                Moments = new DateTimeOffset [] { DateTimeOffset.UtcNow.AddDays(-5), DateTimeOffset.Now.AddDays(10) },
+                ChildrenIds = new Guid[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() },
+                Schedule = new DateTime[] { DateTime.Now.AddDays(-1), DateTime.Now.AddMonths(2), DateTime.Now.AddYears(10) },
+                Moments = new DateTimeOffset[] { DateTimeOffset.UtcNow.AddDays(-5), DateTimeOffset.Now.AddDays(10) },
                 Tags = new List<string> {"The quick brown fox jumps over the lazy dog", "Reflection.Emit", string.Empty, "0" },
                 AlternativeId = Guid.NewGuid()
             };
@@ -170,8 +170,7 @@ namespace MeasureSerialization
                 "Newtonsoft JsonSerializer",
                 TimeSpan.FromTicks(jsonStopWatch.ElapsedTicks / repeatCount).TotalMilliseconds,
                 jsonBytesCount);
-             Console.WriteLine(hor);
-
+            Console.WriteLine(hor);
         }
     }
 }

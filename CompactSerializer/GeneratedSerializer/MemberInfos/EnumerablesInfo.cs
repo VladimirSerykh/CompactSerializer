@@ -41,7 +41,7 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
             {
                 return _arrayGetValueMethodLazy.Value;
             }
-        }       
+        }
 
         private static readonly Dictionary<Type, MethodInfo> ToArrayMethodsMap = new Dictionary<Type, MethodInfo>();
 

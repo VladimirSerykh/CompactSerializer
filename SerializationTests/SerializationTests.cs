@@ -59,7 +59,7 @@ namespace SerializationTests
             var deserializedVersion = string.Empty;
             using (var stream = new MemoryStream())
             {
-                var serializer = new ReflectionCompactSerializer<Entity>();                
+                var serializer = new ReflectionCompactSerializer<Entity>();
                 typeVersion = serializer.GetTypeVersion();
                 serializer.WriteVersion(stream, typeVersion);
                 serializer.Serialize(originalEntity, stream);
