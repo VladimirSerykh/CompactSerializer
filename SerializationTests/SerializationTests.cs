@@ -5,12 +5,7 @@ using SourcesForIL;
 using System.IO;
 using CompactSerializer;
 using CompactSerializer.GeneratedSerializer;
-using System.Diagnostics;
 using KellermanSoftware.CompareNetObjects;
-using Newtonsoft.Json;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Collections.Generic;
 
 namespace SerializationTests

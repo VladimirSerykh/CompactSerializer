@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using System;
-using System.Text;
 using System.Reflection;
-using System.Collections.Generic;
 using CompactSerializer.GeneratedSerializer.MemberInfos;
 using System.Linq;
 
