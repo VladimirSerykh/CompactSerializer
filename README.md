@@ -26,15 +26,16 @@ For some of them getting bytes representation is trivial, such as calling Guid.T
 <br/>
 <br/>
 This implementation was compared to System.Runtime.Serialization.Formatters.Binary.BinaryFormatter and Newtonsoft JsonSerializer on performance speed and representation bytes count. When run with object of the kind it was designed for, even pure Reflection version performed faster, than these two serializers. In compactness, surely, both Reflection and Reflection.Emit realizations were superior to library analogs.
-<br/>The exact experiment results were like this:
+<br/>The exact experiment results for 10000 iterations were like this:
 <br/>
 <br/>
 <table>
 <tr><td>Serializer</td><td>Average elapsed, ms</td><td>Size, bytes</td></tr>
-<tr><td>EmitSerializer</td><td>10.9168</td><td>477</td></tr>
-<tr><td>ReflectionSerializer</td><td>23.5812</td><td>477</td></tr>
-<tr><td>BinaryFormatter</td><td>239.1568</td><td>1959</td></tr>
-<tr><td>Newtonsoft JsonSerializer</td><td>68.4361</td><td>1157</td></tr>
+<tr><td>EmitSerializer</td><td>0.0024</td><td>477</td></tr>
+<tr><td>ReflectionSerializer</td><td>0.0171</td><td>477</td></tr>
+<tr><td>ProtobufSerializer</td><td>0.0069</td><td>499</td></tr>
+<tr><td>BinaryFormatter</td><td>0.1479</td><td>1959</td></tr>
+<tr><td>Newtonsoft JsonSerializer</td><td>0.0239</td><td>1156</td></tr>
 </table>
 <br/>
 EmitSerializer compiled in: 105.1458 ms

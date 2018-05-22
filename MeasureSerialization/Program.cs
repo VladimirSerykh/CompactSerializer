@@ -53,7 +53,7 @@ namespace MeasureSerialization
                 AlternativeId = Guid.NewGuid()
             };
 
-            var repeatCount = 1000;
+            var repeatCount = 10000;
 
             Entity deserialized = null;
             var compilationStopWatch = new Stopwatch();
@@ -120,13 +120,11 @@ namespace MeasureSerialization
                 for (var repeat = 0; repeat < repeatCount; repeat++)
                 {
                     protobufStopwatch.Start();
-                    protobufSerializer.WriteVersion(stream, typeVersion);
                     protobufSerializer.Serialize(originalEntity, stream);
                     protobufStopwatch.Stop();
                     protobufBytesCount = stream.Length;
                     stream.Seek(0, SeekOrigin.Begin);
                     protobufStopwatch.Start();
-                    protobufSerializer.ReadObjectVersion(stream);
                     var deserializedEntity = protobufSerializer.Deserialize(stream);
                     protobufStopwatch.Stop();
                     stream.Seek(0, SeekOrigin.Begin);
