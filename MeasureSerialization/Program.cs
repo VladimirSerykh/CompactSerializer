@@ -7,7 +7,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using CompactSerializer;
 using CompactSerializer.GeneratedSerializer;
+using CompactSerializer.Protobuf;
 using Newtonsoft.Json;
+using ProtoBuf;
+using ProtoBuf.Meta;
 using SourcesForIL;
 
 namespace MeasureSerialization
@@ -49,7 +52,8 @@ namespace MeasureSerialization
                 Tags = new List<string> {"The quick brown fox jumps over the lazy dog", "Reflection.Emit", string.Empty, "0" },
                 AlternativeId = Guid.NewGuid()
             };
-            
+
+            var repeatCount = 1000;
 
             Entity deserialized = null;
             var compilationStopWatch = new Stopwatch();
@@ -57,8 +61,6 @@ namespace MeasureSerialization
             var emitSerializer = EmitSerializerGenerator.Generate<Entity>();
             compilationStopWatch.Stop();
             Console.WriteLine("EmitSerializer compiled in: {0} ms", compilationStopWatch.Elapsed.TotalMilliseconds);
-
-            var repeatCount = 1000;
 
             var emitSerializerStopWatch = new Stopwatch();
             var emitSerializedBytesCount = 0L;
@@ -81,7 +83,6 @@ namespace MeasureSerialization
                 }
             }
 
-            Entity deserializedEntity = null;
             var reflectionBytesCount = 0L;
             var reflectionStopwatch = new Stopwatch();
             using (var stream = new MemoryStream())
@@ -99,8 +100,35 @@ namespace MeasureSerialization
                     stream.Seek(0, SeekOrigin.Begin);
                     reflectionStopwatch.Start();
                     reflectionSerializer.ReadObjectVersion(stream);
-                    deserializedEntity = reflectionSerializer.Deserialize(stream);
+                    var deserializedEntity = reflectionSerializer.Deserialize(stream);
                     reflectionStopwatch.Stop();
+                    stream.Seek(0, SeekOrigin.Begin);
+                }
+            }
+
+            var protobufBytesCount = 0L;
+            var protobufStopwatch = new Stopwatch();
+            using (var stream = new MemoryStream())
+            {
+                var protobufSerializer = new ProtobufSerializer<Entity>();
+                // Register DateTimeOffsetSurrogate (because protobuf-net doesn't support DateTimeOffset)
+                RuntimeTypeModel.Default.Add(typeof(DateTimeOffset), false).SetSurrogate(typeof(DateTimeOffsetSurrogate));
+                // Precompile serializer for Entity
+                Serializer.PrepareSerializer<Entity>();
+                typeVersion = protobufSerializer.GetTypeVersion();
+
+                for (var repeat = 0; repeat < repeatCount; repeat++)
+                {
+                    protobufStopwatch.Start();
+                    protobufSerializer.WriteVersion(stream, typeVersion);
+                    protobufSerializer.Serialize(originalEntity, stream);
+                    protobufStopwatch.Stop();
+                    protobufBytesCount = stream.Length;
+                    stream.Seek(0, SeekOrigin.Begin);
+                    protobufStopwatch.Start();
+                    protobufSerializer.ReadObjectVersion(stream);
+                    var deserializedEntity = protobufSerializer.Deserialize(stream);
+                    protobufStopwatch.Stop();
                     stream.Seek(0, SeekOrigin.Begin);
                 }
             }
@@ -154,6 +182,13 @@ namespace MeasureSerialization
                 "ReflectionSerializer",
                 TimeSpan.FromTicks(reflectionStopwatch.ElapsedTicks / repeatCount).TotalMilliseconds,
                 reflectionBytesCount);
+            Console.WriteLine(hor);
+
+            Console.WriteLine(
+                rowFormat,
+                "ProtobufSerializer",
+                TimeSpan.FromTicks(protobufStopwatch.ElapsedTicks / repeatCount).TotalMilliseconds,
+                protobufBytesCount);
             Console.WriteLine(hor);
 
             Console.WriteLine(
