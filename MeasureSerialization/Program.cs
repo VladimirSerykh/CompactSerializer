@@ -1,14 +1,14 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using Newtonsoft.Json;
-using SourcesForIL;
 using CompactSerializer;
 using CompactSerializer.GeneratedSerializer;
-using System.Collections.Generic;
+using Newtonsoft.Json;
+using SourcesForIL;
 
 namespace MeasureSerialization
 {
@@ -40,12 +40,12 @@ namespace MeasureSerialization
                 ChangedAt = DateTimeOffset.Now,
                 ChangedAtUtc = DateTimeOffset.UtcNow,
                 References = null,
-                Weeks = new List<short>() { 3, 12, 24, 48, 53, 61 },
-                PricesHistory = new decimal[] { 225.8M, 226M, 227.87M, 224.87M },
-                BitMap = new bool[] { true, true, false, true, false, false, true, true },
-                ChildrenIds = new Guid[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() },
-                Schedule = new DateTime[] { DateTime.Now.AddDays(-1), DateTime.Now.AddMonths(2), DateTime.Now.AddYears(10) },
-                Moments = new DateTimeOffset[] { DateTimeOffset.UtcNow.AddDays(-5), DateTimeOffset.Now.AddDays(10) },
+                Weeks = new List<short> { 3, 12, 24, 48, 53, 61 },
+                PricesHistory = new[] { 225.8M, 226M, 227.87M, 224.87M },
+                BitMap = new[] { true, true, false, true, false, false, true, true },
+                ChildrenIds = new[] { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() },
+                Schedule = new[] { DateTime.Now.AddDays(-1), DateTime.Now.AddMonths(2), DateTime.Now.AddYears(10) },
+                Moments = new[] { DateTimeOffset.UtcNow.AddDays(-5), DateTimeOffset.Now.AddDays(10) },
                 Tags = new List<string> {"The quick brown fox jumps over the lazy dog", "Reflection.Emit", string.Empty, "0" },
                 AlternativeId = Guid.NewGuid()
             };

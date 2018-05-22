@@ -14,7 +14,7 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
             Constructor = constructor;
 
             _countPropertyLazy = new Lazy<MethodInfo>(() => CollectionType.GetProperty("Count").GetMethod);
-            _addMethodLazy = new Lazy<MethodInfo>(() => CollectionType.GetMethod("Add", new Type[] { elementType }));
+            _addMethodLazy = new Lazy<MethodInfo>(() => CollectionType.GetMethod("Add", new[] { elementType }));
             _getEnumeratorMethodLazy = new Lazy<MethodInfo>(() => CollectionType.GetMethod("GetEnumerator"));
 
             _enumeratorMoveNextMethodLazy = new Lazy<MethodInfo>(() => EnumeratorType.GetMethod("MoveNext"));
@@ -36,13 +36,13 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
         public static bool IsICollectionType(Type collectionType)
         {
             var genericEnumerableType = typeof(ICollection<>);
-            if (collectionType.GenericTypeArguments.Count() != 1)
+            if (collectionType.GenericTypeArguments.Length != 1)
             {
                 return false;
             }
 
             var elementType = collectionType.GenericTypeArguments.Single();
-            var expectedType = genericEnumerableType.MakeGenericType(new [] { elementType } );
+            var expectedType = genericEnumerableType.MakeGenericType(elementType);
 
             if (!expectedType.IsAssignableFrom(collectionType))
             {

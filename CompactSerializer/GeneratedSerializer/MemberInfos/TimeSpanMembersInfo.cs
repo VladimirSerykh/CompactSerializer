@@ -13,6 +13,6 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
            ReflectionInfo.GetPropertyGetterMethodInfo<TimeSpan, long>(dt => dt.Ticks));
 
         private static readonly Lazy<MethodInfo> _fromTicksMethodLazy = new Lazy<MethodInfo>(() =>
-            ReflectionInfo.GetStaticMethodInfo<TimeSpan>(_ => TimeSpan.FromTicks(0)));
+            ReflectionInfo.GetStaticMethodInfo(_ => TimeSpan.FromTicks(0)));
     }
 }

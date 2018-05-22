@@ -18,6 +18,6 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
            ReflectionInfo.GetPropertyGetterMethodInfo<DateTime, long>(dt => dt.Ticks));
 
         private static readonly Lazy<ConstructorInfo> _constructorLazy = new Lazy<ConstructorInfo>(() =>
-            typeof(DateTime).GetConstructor(new [] {typeof(long), typeof(DateTimeKind)}));
+            typeof(DateTime).GetConstructor(new[] {typeof(long), typeof(DateTimeKind)}));
     }
 }

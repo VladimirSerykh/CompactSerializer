@@ -1,19 +1,14 @@
-﻿using System.IO;
-using System;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using CompactSerializer.GeneratedSerializer.MemberInfos;
-using System.Linq;
 
 namespace CompactSerializer
 {
     public class ReflectionCompactSerializer<TObject> : CompactSerializerBase<TObject>
         where TObject: class, new ()
     {
-        public ReflectionCompactSerializer()
-        {
-
-        }
-
         public override void WriteVersion(Stream stream, string version)
         {
             WriteString(stream, version);
@@ -47,7 +42,7 @@ namespace CompactSerializer
                         ? (Array)property.GetValue(theObject) 
                         : (Array)EnumerablesInfo
                             .GetToArrayMethod(enumerableType)
-                            .Invoke(null, new object[] { property.GetValue(theObject)});
+                            .Invoke(null, new[] { property.GetValue(theObject)});
                     if (array != null)
                     {
                         var arrayLengthBytes = BitConverter.GetBytes(array.Length);

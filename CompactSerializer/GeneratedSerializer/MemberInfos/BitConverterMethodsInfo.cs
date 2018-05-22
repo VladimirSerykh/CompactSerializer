@@ -20,10 +20,10 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
                 return decimalMethod;
             }
 
-            var method = typeof(BitConverter).GetMethod(MethodName, new Type[] { type });
+            var method = typeof(BitConverter).GetMethod(MethodName, new[] { type });
             if (method == null)
             {
-                throw new InvalidOperationException("No overload for parameter of type " + type.Name);
+                throw new InvalidOperationException($"No overload for parameter of type {type.Name}");
             }
 
             _getBytesMethods[type] = method;

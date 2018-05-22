@@ -1,15 +1,14 @@
 using System;
-using System.Reflection;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace CompactSerializer.GeneratedSerializer.MemberInfos
 {       
     public static class TypesInfo
     {
-        public static readonly Type[] PrimitiveTypes = new Type[]
-        {
+        public static readonly Type[] PrimitiveTypes = {
             typeof(bool),
             typeof(short),
             typeof(byte),
@@ -63,7 +62,7 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
 
         public static byte[] GetDecimalBytes(decimal value)
         {
-            var bits = decimal.GetBits((decimal)value); 
+            var bits = decimal.GetBits(value); 
             var bytes = new List<byte>(); 
             
             foreach (var bitsPart in bits) 
@@ -102,7 +101,7 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
             }
 
             var genericEnumerableType = typeof(IEnumerable<>);
-            enumerableType = genericEnumerableType.MakeGenericType(new [] { type.GenericTypeArguments.First() } );
+            enumerableType = genericEnumerableType.MakeGenericType(type.GenericTypeArguments.First());
             if (!enumerableType.IsAssignableFrom(type))
             {
                 return false;
@@ -160,7 +159,7 @@ namespace CompactSerializer.GeneratedSerializer.MemberInfos
             ReflectionInfo.GetMethodInfo<Type, Type>(type => type.GetElementType()));
 
         private static readonly Lazy<MethodInfo> _getTypeFromHandleMethodLazy = new Lazy<MethodInfo>(() =>
-            ReflectionInfo.GetStaticMethodInfo<Type>(_ => Type.GetTypeFromHandle(new RuntimeTypeHandle())));
+            ReflectionInfo.GetStaticMethodInfo(_ => Type.GetTypeFromHandle(new RuntimeTypeHandle())));
 
         private static readonly Lazy<MethodInfo> _getDisposeMethodLazy = new Lazy<MethodInfo>(() =>
             ReflectionInfo.GetVoidMethodInfo<IDisposable>(disposable => disposable.Dispose()));

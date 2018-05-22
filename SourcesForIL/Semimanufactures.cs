@@ -43,7 +43,7 @@ namespace SourcesForIL
 
         private static void WriteStringProperty(Stream stream, Entity entity)
         {
-            var stringVal = (string)entity.Name;
+            var stringVal = entity.Name;
             if (stringVal != null) 
             {
                 var stringBytes = Encoding.UTF8.GetBytes(stringVal);

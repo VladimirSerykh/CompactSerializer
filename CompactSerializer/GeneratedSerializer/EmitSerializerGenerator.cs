@@ -15,7 +15,7 @@ namespace CompactSerializer.GeneratedSerializer
             var propertiesWriter = new DynamicMethod(
                 "WriteProperties",
                 null,
-                new Type[] { typeof(Stream), typeof(TObject) },
+                new[] { typeof(Stream), typeof(TObject) },
                 typeof(EmitSerializer<TObject>));
             var writerIlGenerator = propertiesWriter.GetILGenerator();
             var writerEmitter = new CodeEmitter(writerIlGenerator);
@@ -23,20 +23,20 @@ namespace CompactSerializer.GeneratedSerializer
              var propertiesReader = new DynamicMethod(
                 "ReadProperties",
                 null,
-                new Type[] { typeof(Stream), typeof(TObject) },
+                new[] { typeof(Stream), typeof(TObject) },
                 typeof(EmitSerializer<TObject>));
             var readerIlGenerator = propertiesReader.GetILGenerator();
             var readerEmitter = new CodeEmitter(readerIlGenerator);
 
             var properties = typeof(TObject).GetProperties(BindingFlags.Instance | BindingFlags.Public);
-            foreach(var property in properties)
+            foreach (var property in properties)
             {
                 if (property.PropertyType == typeof(byte))
                 {
                     writerEmitter.EmitWriteBytePropertyCode(property);
                     readerEmitter.EmitReadBytePropertyCode(property);
                 }
-                else if(TypesInfo.PrimitiveTypes.Contains(property.PropertyType))
+                else if (TypesInfo.PrimitiveTypes.Contains(property.PropertyType))
                 {
                     writerEmitter.EmitWritePrimitiveTypePropertyCode(property);
                     readerEmitter.EmitReadPrimitiveTypePropertyCode(property);
@@ -79,7 +79,7 @@ namespace CompactSerializer.GeneratedSerializer
                 else
                 {
                     throw new NotImplementedException(
-                        "Not supported property: " + property.PropertyType.ToString() + " " + property.Name);
+                        $"Not supported property: {property.PropertyType} {property.Name}");
                 }
             }
 
