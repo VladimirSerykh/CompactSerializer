@@ -3,9 +3,11 @@ using System.IO;
 using System.Text;
 using CompactSerializer.GeneratedSerializer.MemberInfos;
 
-public abstract class CompactSerializerBase<TObject>
-    where TObject: class, new ()
+namespace CompactSerializer
 {
+    public abstract class CompactSerializerBase<TObject>
+        where TObject: class, new ()
+    {
         public virtual string GetTypeVersion()
         {
             return typeof(TObject).Assembly.GetName().Version.ToString();
@@ -60,4 +62,5 @@ public abstract class CompactSerializerBase<TObject>
         protected Encoding Encoding = Encoding.UTF8;
 
         protected const int NullBytesCout = -1;
+    }
 }
