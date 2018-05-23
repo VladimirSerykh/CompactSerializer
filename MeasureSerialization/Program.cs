@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using BenchmarkDotNet.Running;
+using System;
 using System.IO;
-using System.Runtime.Serialization.Formatters;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Running;
-using CompactSerializer;
-using CompactSerializer.GeneratedSerializer;
-using CompactSerializer.Protobuf;
-using Newtonsoft.Json;
-using ProtoBuf;
-using ProtoBuf.Meta;
-using SourcesForIL;
+using System.Linq;
 
 namespace MeasureSerialization
 {
@@ -21,18 +9,49 @@ namespace MeasureSerialization
     {
         static void Main(string[] args)
         {
-            var emitSummary = BenchmarkRunner.Run<EmitSerializerBenchmark>();
-            var protobufSummary = BenchmarkRunner.Run<ProtobufSerializerBenchmark>();
+            var emitSummary = BenchmarkRunner.Run<SerializerBenchmark>();
 
+            Console.WriteLine();
 
-            //var switcher = new BenchmarkSwitcher(new[] {
-            //    typeof(EmitSerializerBenchmark),
-            //    typeof(ReflectionSerializerBenchmark),
-            //    typeof(ProtobufSerializerBenchmark),
-            //    typeof(BinarySerializerBenchmark),
-            //    typeof(NewtonsoftSerializerBenchmark),
-            //});
-            //switcher.Run(args);
+            var benchmark = new SerializerBenchmark();
+
+            new[]
+                {
+                    SerializerType.Emit,
+                    SerializerType.Reflection,
+                    SerializerType.Protobuf,
+                    SerializerType.BinaryFormatter,
+                    SerializerType.NewtonsoftJson,
+                }
+                .Select(t => new
+                    {
+                        Serialier = benchmark.CreateSerializer(t),
+                        Type = t,
+                    })
+                .Select(v =>
+                {
+                    var stream = new MemoryStream();
+                    v.Serialier.Serialize(benchmark.Entity, stream);
+                    return new
+                    {
+                        Stream = stream,
+                        Type = v.Type,
+                    };
+                })
+                .Select(v =>
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(v.Type);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" serializer produced stream with size of ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(v.Stream.Length);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write(" bytes");
+                    Console.WriteLine();
+                    return v;
+                })
+                .ToArray();
         }
     }
 }
